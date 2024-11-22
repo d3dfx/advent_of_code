@@ -1,10 +1,8 @@
 #!/bin/python3
 import argparse
 
-# import common
+import four.the_ideal_stocking_stuffer as four
 import three.perfectly_spherical_houses_in_a_vacuum as three
-
-# from common import common
 
 
 def main():
@@ -22,6 +20,8 @@ def main():
     match args.day:
         case "3" | "three":
             three.main()
+        case "4" | "four":
+            four.main()
 
 
 if __name__ == "__main__":
