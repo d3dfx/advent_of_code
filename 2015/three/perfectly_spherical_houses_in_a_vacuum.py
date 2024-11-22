@@ -1,16 +1,18 @@
 #!/bin/python3
 
-import common
+from os import path
+
+from common import common
 
 
 def main():
-    puzzle_input = common.get_puzzle_input()
+    txt = common.get_puzzle_input(path.dirname(__file__) + "/puzzle_input.txt")
     santa_loc = (0, 0)
     robo_santa_loc = (0, 0)
     santa_loc_log = [(0, 0), (0, 0)]
     santa_turn = True
 
-    for char in puzzle_input:
+    for char in txt:
         if santa_turn:
             current_santa = santa_loc
         else:
