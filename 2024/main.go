@@ -4,6 +4,8 @@ import (
 	"aoc/2024/one"
 	"flag"
 	"fmt"
+	"log"
+	"os"
 )
 
 func main() {
@@ -22,8 +24,19 @@ func main() {
 
 	switch day {
 	case "1":
-		fmt.Printf(day)
+		one.RunPart(puzzle, readPuzzleInput("./one/"))
+	default:
+		fmt.Printf("\nNo day with number %s found\n", day)
+	}
+}
+
+func readPuzzleInput(folder string) string {
+
+	data, err := os.ReadFile(folder + "input.txt")
+
+	if err != nil {
+		log.Fatal(err)
 	}
 
-	one.PartOne()
+	return string(data)
 }
