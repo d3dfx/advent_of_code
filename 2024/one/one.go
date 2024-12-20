@@ -20,14 +20,14 @@ func RunPart(part string, puzzleInput string) {
 }
 
 func partOne(input string) string {
-	a, b := split_loc_lists(input)
+	loc_list1, loc_list2 := split_loc_lists(input)
 
-	slices.Sort(a)
-	slices.Sort(b)
+	slices.Sort(loc_list1)
+	slices.Sort(loc_list2)
 
 	total_dist := 0
-	for idx := 0; idx < len(a); idx++ {
-		total_dist = total_dist + int(math.Abs((float64(a[idx] - b[idx]))))
+	for idx := 0; idx < len(loc_list1); idx++ {
+		total_dist = total_dist + int(math.Abs((float64(loc_list1[idx] - loc_list2[idx]))))
 	}
 
 	return strconv.Itoa(total_dist)
