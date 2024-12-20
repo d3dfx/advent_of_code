@@ -2,7 +2,7 @@ package one
 
 import (
 	"fmt"
-	// "sort"
+	"maps"
 	"math"
 	"slices"
 	"strconv"
@@ -34,7 +34,34 @@ func partOne(input string) string {
 }
 
 func partTwo(input string) string {
-	return ""
+	loc_list1, loc_list2 := split_loc_lists(input)
+
+	left_items := unique_items(loc_list1)
+	right_items := unique_items(loc_list2)
+
+	similarity_score := 0
+	for left_item := range maps.Keys(left_items) {
+		fmt.Println(right_items[left_item])
+		similarity_score = similarity_score + (left_item * right_items[left_item])
+	}
+
+	return strconv.Itoa(similarity_score)
+}
+
+func unique_items(group []int) map[int]int {
+
+	var uniq_map map[int]int
+	uniq_map = make(map[int]int)
+	for _, item := range group {
+		val, exists := uniq_map[item]
+		if exists {
+			uniq_map[item] = val + 1
+		} else {
+			uniq_map[item] = 1
+		}
+	}
+
+	return uniq_map
 }
 
 func split_loc_lists(loc_lists string) (loc_list1, loc_list2 []int) {
