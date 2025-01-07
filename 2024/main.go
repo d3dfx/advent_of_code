@@ -2,6 +2,7 @@ package main
 
 import (
 	"aoc/2024/one"
+	"aoc/2024/two"
 	"flag"
 	"fmt"
 	"log"
@@ -25,6 +26,8 @@ func main() {
 	switch day {
 	case "1":
 		one.RunPart(puzzle, readPuzzleInput("./one/"))
+	case "2":
+		two.RunPart(puzzle, readPuzzleInput("./two/"))
 	default:
 		fmt.Printf("\nNo day with number %s found\n", day)
 	}
