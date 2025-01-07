@@ -53,12 +53,67 @@ func partOne(input string) string {
 }
 
 func partTwo(input string) string {
-	return input
+	reports := cleanArr(strings.Split(input, "\n"))
+	var safeTotal int = 0
+	for _, report := range reports {
+		var levels = strings.Split(report, " ")
+
+		unsafe := unsafeLevels(levels)
+
+		for _, idx := range unsafe {
+
+			newLevels := make([]string, len(levels))
+			copy(newLevels, levels)
+
+			next := idx + 1
+			fmt.Println(newLevels)
+
+			newLevels = append(newLevels[:idx], newLevels[next:]...)
+			fmt.Println("idx removed: ", idx)
+			fmt.Println(newLevels)
+			unsafe = unsafeLevels(newLevels)
+
+			if len(unsafe) == 0 {
+				break
+			}
+		}
+
+		if len(unsafe) == 0 {
+			safeTotal++
+		}
+	}
+	return strconv.Itoa(safeTotal)
 }
 
-// func split_loc_lists(loc_lists string) (loc_list1, loc_list2 []int) {
-// 	return loc_list1, loc_list2
-// }
+func unsafeLevels(levels []string) []int {
+	var level_inc bool
+	var unsafe []int
+	for idx := 0; idx < len(levels)-1; idx++ {
+
+		current, err := strconv.Atoi(levels[idx])
+		next, err := strconv.Atoi(levels[idx+1])
+
+		if err != nil {
+			fmt.Println(err.Error())
+			continue
+		}
+
+		diff, inc := absInt(current, next)
+
+		if idx == 0 {
+			level_inc = inc
+		}
+
+		if diff > 3 || diff == 0 || level_inc != inc {
+			unsafe = append(unsafe, idx, idx+1)
+			if idx > 0 {
+				unsafe = append(unsafe, idx-1)
+			}
+		}
+	}
+
+	return unsafe
+}
 
 func cleanArr(arr []string) []string {
 	var newArr []string
